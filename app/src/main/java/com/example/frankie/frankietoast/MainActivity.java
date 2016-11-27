@@ -1,7 +1,9 @@
 package com.example.frankie.frankietoast;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Vibrator;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.HapticFeedbackConstants;
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         setContentView(R.layout.activity_main);
         button = (Button) findViewById(R.id.button);
         button = (Button) findViewById(R.id.button2);
@@ -41,17 +45,19 @@ public class MainActivity extends AppCompatActivity {
         toast.setView(appear);
         toast.show();
     }
-
     public void makeFragment1(View view) {
         MakeFragment makeFragmentObj = new MakeFragment();
-        getFragmentManager().beginTransaction().replace(R.id.activity_main,makeFragmentObj).commit();
+        getFragmentManager().beginTransaction().replace(R.id.activity_main,makeFragmentObj).addToBackStack("fragment1").commit();
     }
-
+    public void makeFragment2(View view) {
+        MakeFragment2 makeFragment2 = new MakeFragment2();
+        getFragmentManager().beginTransaction().replace(R.id.activity_main,makeFragment2).addToBackStack("fragment2").commit();
+    }
+    public void makeTone(View view){
+        final MediaPlayer toneMP = MediaPlayer.create(this, R.raw.tone);
+        toneMP.start();
+    }
     public void goBack(View view) {
-        if (getFragmentManager().getBackStackEntryCount() == 0) {
-            this.finish();
-        } else {
-            getFragmentManager().popBackStack();
-        }
+        getFragmentManager().popBackStack();
     }
 }
