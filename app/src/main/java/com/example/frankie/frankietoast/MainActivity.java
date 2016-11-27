@@ -1,7 +1,10 @@
 package com.example.frankie.frankietoast;
 
+import android.content.Context;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +12,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    ViewGroup fragmentMake;
     Button button,button2;
+    Vibrator v, vibrator;
 
 
     @Override
@@ -19,20 +23,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         button = (Button) findViewById(R.id.button);
         button = (Button) findViewById(R.id.button2);
+        fragmentMake = (ViewGroup) findViewById(R.id.activity_main);
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(400);
     }
     public void makeToast(View v){
+        v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
         Toast toast = Toast.makeText(this,"Ha, you just tapped the button", Toast.LENGTH_SHORT);
         toast.show();
     }
     public void makeToast2(View v){
+        v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
         Toast toast = new Toast(this);
         toast.setDuration(Toast.LENGTH_SHORT);
         LayoutInflater lin =getLayoutInflater();
         View appear=lin.inflate(R.layout.toast_layout,(ViewGroup) findViewById(R.id.root));
         toast.setView(appear);
         toast.show();
+    }
 
+    public void makeFragment1(View view) {
+        MakeFragment makeFragmentObj = new MakeFragment();
+        getFragmentManager().beginTransaction().replace(R.id.activity_main,makeFragmentObj).commit();
+    }
 
-
+    public void goBack(View view) {
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            this.finish();
+        } else {
+            getFragmentManager().popBackStack();
+        }
     }
 }

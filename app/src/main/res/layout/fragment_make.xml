@@ -1,0 +1,27 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.frankie.frankietoast.MakeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffbb00"/>
+
+    <ImageView
+        android:layout_width="397dp"
+        android:layout_height="662dp"
+        app:srcCompat="@drawable/wowfull"
+        android:id="@+id/imageView3" />
+
+    <Button
+        android:text="back"
+        android:layout_width="37dp"
+        android:layout_height="38dp"
+        android:id="@+id/buttonBack"
+        android:onClick="goBack"/>
+
+</FrameLayout>
